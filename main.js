@@ -16,8 +16,8 @@ courselevelList.forEach((level, levelIdx) => {
             card.classList.add('card');
             const cardImg = document.createElement('img');
             cardImg.classList.add('card-img');
-            // cardImg.style.width = '180px';
-            cardImg.style.height = '70%';
+            cardImg.style.width = '180px';
+            cardImg.style.height = '140px';
             const cardDetail = document.createElement('a');
             cardDetail.classList.add('card-detail');
             cardDetail.setAttribute('href', 'https://www.youtube.com/');
@@ -69,20 +69,22 @@ upward.addEventListener('click', moveBackToTop);
 // 강의 슬라이더
 const leftButton = document.getElementsByClassName('left-button');
 const rightButton = document.getElementsByClassName('right-button');
-let moveData = 0;
 
 function moveRight(event) {
     const leftButton = event.target;
     const rightButton = leftButton.nextElementSibling;
     const cardContainer = leftButton.parentElement.parentElement.nextElementSibling;
+    const lectureContainer = cardContainer.parentElement;
+    let moveDist = parseInt(lectureContainer.getAttribute('data-moveDist'));
 
-    moveData = moveData + 196 * 4;
-    cardContainer.style.transform = 'translateX(' + String(moveData) + 'px';    
+    moveDist = moveDist + 196 * 4;
+    lectureContainer.setAttribute('data-moveDist', `${moveDist}`);
+    cardContainer.style.transform = 'translateX(' + String(moveDist) + 'px';    
     rightButton.addEventListener('click', moveLeft);
     rightButton.classList.remove('button-right-off');
     rightButton.classList.add('button-right-on');
 
-    if (moveData === 0) {
+    if (moveDist === 0) {
         leftButton.removeEventListener('click', moveRight);
         leftButton.classList.remove('button-left-on');
     }
@@ -95,15 +97,16 @@ function moveLeft(event) {
     const liList = rightButton.parentElement.parentElement.nextElementSibling.children;
     const lectureContainer = cardContainer.parentElement;
     let lectureContainerWidth = parseInt(window.getComputedStyle(lectureContainer).width);
+    let moveDist = parseInt(lectureContainer.getAttribute('data-moveDist'));
 
     leftButton.addEventListener('click', moveRight);
     leftButton.classList.add('button-left-on');
-    moveData = moveData - 196 * 4;
-    cardContainer.setAttribute('data-position', moveData);
+    moveDist = moveDist - 196 * 4;
+    lectureContainer.setAttribute('data-moveDist', `${moveDist}`);
     cardContainer.style.transition = 'transform 1s';
-    cardContainer.style.transform = 'translateX(' + String(moveData) + 'px';
+    cardContainer.style.transform = 'translateX(' + String(moveDist) + 'px';
 
-    if (liList.length * 196 + moveData < lectureContainerWidth) {
+    if (liList.length * 196 + moveDist < lectureContainerWidth) {
         rightButton.removeEventListener('click', moveLeft);
         rightButton.classList.remove('button-right-on');
         rightButton.classList.add('button-right-off');
