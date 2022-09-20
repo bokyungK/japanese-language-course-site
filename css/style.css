@@ -125,7 +125,7 @@ section {
 }
 
 .type-name {
-    font-size: 0.8rem;    rightButton.classList.add('button-right-on');
+    font-size: 0.8rem;
 }
 
 .type-container:hover {
@@ -220,6 +220,7 @@ section {
     display: flex;
     list-style: none;
     padding-left: 0;
+    transition: transform 1s;
 }
 
 .card {

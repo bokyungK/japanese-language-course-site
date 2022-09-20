@@ -74,43 +74,57 @@ function moveRight(event) {
     const leftButton = event.target;
     const rightButton = leftButton.nextElementSibling;
     const cardContainer = leftButton.parentElement.parentElement.nextElementSibling;
+
     const lectureContainer = cardContainer.parentElement;
+    const nowSliderWidth = parseInt(window.getComputedStyle(lectureContainer).width);
     let moveDist = parseInt(lectureContainer.getAttribute('data-moveDist'));
 
-    moveDist = moveDist + 196 * 4;
-    lectureContainer.setAttribute('data-moveDist', `${moveDist}`);
-    cardContainer.style.transform = 'translateX(' + String(moveDist) + 'px';    
-    rightButton.addEventListener('click', moveLeft);
-    rightButton.classList.remove('button-right-off');
-    rightButton.classList.add('button-right-on');
+    if (Math.abs(moveDist) > nowSliderWidth) {
+        moveDist += nowSliderWidth;
+        cardContainer.style.transform = 'translateX(' + String(moveDist) + 'px';
+    } else {
+        moveDist = 0;
+        cardContainer.style.transform = 'translateX(' + String(moveDist) + 'px';
 
-    if (moveDist === 0) {
         leftButton.removeEventListener('click', moveRight);
         leftButton.classList.remove('button-left-on');
+        leftButton.classList.add('button-left-off');
     }
+    lectureContainer.setAttribute('data-moveDist', `${moveDist}`);
+
+    rightButton.addEventListener('click', moveLeft);
+    rightButton.classList.add('button-right-on');
+    rightButton.classList.remove('button-right-off');
 }
 
 function moveLeft(event) {
     const rightButton = event.target;
     const leftButton = rightButton.previousElementSibling;
-    const cardContainer = rightButton.parentElement.parentElement.nextElementSibling;
+
     const liList = rightButton.parentElement.parentElement.nextElementSibling.children;
+    const liWidth = parseInt(window.getComputedStyle(liList[0]).width);
+    const totalLiWidth = liList.length * (liWidth + 16);
+    const cardContainer = rightButton.parentElement.parentElement.nextElementSibling;
+
     const lectureContainer = cardContainer.parentElement;
-    let lectureContainerWidth = parseInt(window.getComputedStyle(lectureContainer).width);
+    const nowSliderWidth = parseInt(window.getComputedStyle(lectureContainer).width);
     let moveDist = parseInt(lectureContainer.getAttribute('data-moveDist'));
+    moveDist -= nowSliderWidth;
 
-    leftButton.addEventListener('click', moveRight);
-    leftButton.classList.add('button-left-on');
-    moveDist = moveDist - 196 * 4;
-    lectureContainer.setAttribute('data-moveDist', `${moveDist}`);
-    cardContainer.style.transition = 'transform 1s';
-    cardContainer.style.transform = 'translateX(' + String(moveDist) + 'px';
+    if (totalLiWidth + moveDist > nowSliderWidth) {
+        cardContainer.style.transform = 'translateX(' + String(moveDist) + 'px';
+    } else {
+        moveDist -= (totalLiWidth + moveDist - nowSliderWidth);
+        cardContainer.style.transform = 'translateX(' + String(moveDist) + 'px';
 
-    if (liList.length * 196 + moveDist < lectureContainerWidth) {
         rightButton.removeEventListener('click', moveLeft);
         rightButton.classList.remove('button-right-on');
         rightButton.classList.add('button-right-off');
     }
+    lectureContainer.setAttribute('data-moveDist', `${moveDist}`);
+
+    leftButton.addEventListener('click', moveRight);
+    leftButton.classList.add('button-left-on');
 }
 
 for (let i = 0; i < leftButton.length; i++) {
