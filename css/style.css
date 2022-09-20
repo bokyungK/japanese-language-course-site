@@ -231,10 +231,6 @@ section {
     box-shadow: 10px 10px 10px -5px rgba(25, 42, 70, .3)
 }
 
-.card-img {
-    height: 70%;
-}
-
 .card-detail {
     height: 30%;
     display: block;

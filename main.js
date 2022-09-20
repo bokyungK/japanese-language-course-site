@@ -16,6 +16,8 @@ courselevelList.forEach((level, levelIdx) => {
             card.classList.add('card');
             const cardImg = document.createElement('img');
             cardImg.classList.add('card-img');
+            cardImg.style.width = '180px';
+            cardImg.style.height = '140px';
             const cardDetail = document.createElement('a');
             cardDetail.classList.add('card-detail');
             cardDetail.setAttribute('href', 'https://www.youtube.com/');
