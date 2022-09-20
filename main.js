@@ -16,8 +16,8 @@ courselevelList.forEach((level, levelIdx) => {
             card.classList.add('card');
             const cardImg = document.createElement('img');
             cardImg.classList.add('card-img');
-            cardImg.style.width = '180px';
-            cardImg.style.height = '140px';
+            // cardImg.style.width = '180px';
+            cardImg.style.height = '70%';
             const cardDetail = document.createElement('a');
             cardDetail.classList.add('card-detail');
             cardDetail.setAttribute('href', 'https://www.youtube.com/');
@@ -25,7 +25,7 @@ courselevelList.forEach((level, levelIdx) => {
             cardName.classList.add('card-detail-name');
             const cardDescription = document.createElement('div')
             cardDescription.classList.add('card-detail-description');
-
+            
             cardImg.setAttribute('src', './img/course-img/' + `${level}/${id}.jpg`);
             cardName.innerText = name;
             cardDescription.innerText = description;
@@ -121,7 +121,6 @@ const flowText = () => {
     const cardDetail = document.getElementsByClassName('card-detail');
     
     const moveDescription = (event) => {
-        console.log('true');
         const description = event.target.children[1];
         const descriptionWidth = parseInt(window.getComputedStyle(description).width);
     

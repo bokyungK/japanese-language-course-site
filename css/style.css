@@ -142,9 +142,8 @@ section {
 }
 
 .lecture-container {
-    max-width: 800px;
+    width: 100%;
     height: 100%;
-    margin: 0 auto;
     margin-bottom: 3rem;
     overflow: hidden;
 }
@@ -215,7 +214,8 @@ section {
 }
 
 .card-container {
-    width: 1200px;
+    width: 100%;
+    height: 100%;
     margin-left: 1rem;
     display: flex;
     list-style: none;
@@ -223,12 +223,14 @@ section {
 }
 
 .card {
-    min-width: 180px;
+    width: 180px;
     height: 200px;
     margin-right: 1rem;
     border-radius: 20%;
     overflow: hidden;
-    box-shadow: 10px 10px 10px -5px rgba(25, 42, 70, .3)
+    box-shadow: 10px 10px 10px -5px rgba(25, 42, 70, .3);
+    flex-shrink: 0;
+    flex-grow: 0;
 }
 
 .card-detail {
@@ -241,7 +243,6 @@ section {
 }
 
 .card-detail-name {
-    width: 100%;
     text-align: center;
     margin-bottom: 0.5rem;
     font-size: 0.8rem;
