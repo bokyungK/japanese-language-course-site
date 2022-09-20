@@ -298,9 +298,6 @@ footer > div > div > div:last-child::after {
 }
 
 
-
-
-
 /* 화면 최상단 이동 버튼 */
 #upward-button {
     width: 2rem;
@@ -334,5 +331,33 @@ footer > div > div > div:last-child::after {
 @media only screen and (min-width: 1200px) {
     .inner {
         max-width: 1200px;
+    }
+}
+/* 모바일 버전 */
+@media only screen and (max-width: 824px) {
+    .type-img {
+        margin: 0.3rem;
+    }
+    .type-name {
+        display: none;
+    }
+    footer > div > div > div::after {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 530px) {
+    .head-container {
+        font-size: 1rem;
+        font-weight: bolder;
+    }
+    .banner-title {
+        font-size: 1.1rem;
+    }
+    .banner-message {
+        font-size: 0.9rem;
+    }
+    .info-container {
+        font-size: 0.5rem;
     }
 }
