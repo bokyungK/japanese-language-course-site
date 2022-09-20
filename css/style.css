@@ -4,13 +4,16 @@
 }
 
 body {
+    width: 100%;
+    height: 100%;
     color: #3f464d;
     margin-top: 60px;
+    font-weight: bold;
 }
 
 
 
-/* header 영역 */
+/* header */
 header {
     width: 100%;
     height: 60px;
@@ -18,6 +21,7 @@ header {
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 1000;
 }
 /* 상단 메뉴바 고정 */
 
@@ -45,17 +49,16 @@ a {
     font-size: 1.2rem;
 }
 
-.head-container  a:hover {
+.head-container a:hover {
     color: rgb(249, 160, 175);
 }
 
 
 
-/* main 영역 */
+/* main - banner */
 section {
     width: 100%;
     height: 100%;
-    background-color: gray;
 }
 /* 배너 배경에 이미지 넣고 흐리게 처리하기 */
 /* 사진 움직이면 이미지 움직이도록 만들기 */
@@ -89,39 +92,40 @@ section {
 /* 마진 병합현상이 일어남 */
 
 .skill {
-    padding: 1rem 0;
+    padding: 3rem 0;
     background-color: #fff;
 }
 
-.skill-container {    width: 100%;
+.skill-container {
+    width: 100%;
     margin: 0 auto;
     width: 70%;
     height: 100%;
     display: flex;
     justify-content: space-around;
+    list-style: none;
 }
 
 .type-container {
-    width: 20%;
+    min-width: 20%;
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 0.5rem;
-    border-radius: 10px;
+    border-radius: 3rem;
     background-color: #fff;
     box-shadow: 10px 10px 10px -5px rgba(25, 42, 70, .2);
     transition: 0.4s;
 }
 
-.type-image {
-    margin: 0 1rem;
+.type-img {
+    margin-right: 1rem;
     width: 2.5rem;
     height: 2.5rem;
 }
 
 .type-name {
-    font-size: 0.8rem;
+    font-size: 0.8rem;    rightButton.classList.add('button-right-on');
 }
 
 .type-container:hover {
@@ -129,6 +133,195 @@ section {
     cursor: pointer;
 }
 
+
+
+/* main - lecture */
+.lecture {
+    width: 100%;
+    height: 100%;
+}
+
+.lecture-container {
+    max-width: 800px;
+    height: 100%;
+    margin: 0 auto;
+    margin-bottom: 3rem;
+    overflow: hidden;
+}
+
+.lecture-title {
+    height: 50px;
+    padding: 0 1rem;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.title-button {
+    display: flex;
+}
+
+.button {
+    width: 1.7rem;
+    height: 1.7rem;
+    border-radius: 50%;
+    background-color: #3f464d;
+    color: #fff;
+    text-align: center;
+    line-height: 1.5rem;
+    transition: 0.3s;
+}
+
+.left-button {
+    margin-right: 0.3rem;
+    background-color: lightgray;
+}
+
+.button-left-on {
+    background-color: #3f464d;
+}
+
+.button-left-on:hover {
+    cursor: pointer;
+    background-color: pink !important;
+    transition: transform .2s;
+    transform: translate(-1px); 
+}
+
+.right-button:hover {
+    cursor: pointer;
+    background-color: pink;
+}
+
+.button-right-on {
+    background-color: #3f464d;
+    /* transition: background-color 1s; */
+}
+
+.button-right-off {
+    background-color: lightgray;
+}
+
+.button-right-on:hover {
+    cursor: pointer;
+    background-color: pink !important;
+    transition: transform .2s;
+    transform: translate(1px); 
+}
+
+.button-right-off:hover {
+    background-color: lightgray;
+    cursor: auto;
+}
+
+.card-container {
+    width: 1200px;
+    margin-left: 1rem;
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+}
+
+.card {
+    min-width: 180px;
+    height: 200px;
+    margin-right: 1rem;
+    border-radius: 20%;
+    overflow: hidden;
+    box-shadow: 10px 10px 10px -5px rgba(25, 42, 70, .3)
+}
+
+.card-img {
+    height: 70%;
+}
+
+.card-detail {
+    height: 30%;
+    display: block;
+    padding: 0.5rem 0;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    overflow: hidden;
+}
+
+.card-detail-name {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.card-detail-description {
+    width: min-content;
+    font-size: 0.5rem;
+    font-weight: normal;
+    white-space: nowrap;
+    transition: transform 1s;
+    pointer-events: none;
+}
+
+
+
+/* footer */
+footer {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(204, 197, 197);
+}
+
+.info-container {
+    width: 100%;
+    height: 100%;
+    padding: 2rem 15rem;
+    font-size: 0.7rem;
+    color: gray;
+    display: flex;
+    justify-content: space-around;
+}
+
+footer > div > div > div::after {
+    content: "|";
+    float: right;
+    margin-left: 2rem;
+    display: block;
+}
+footer > div > div > div:last-child::after {
+    content: "";
+}
+
+
+
+
+
+/* 화면 최상단 이동 버튼 */
+#upward-button {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: #3f464d;
+    color: #fff;
+    text-align: center;
+    line-height: 1.7rem;
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 1000;
+    transition: 0.7s;
+}
+
+#upward-button.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+#upward-button:hover {
+    cursor: pointer;
+    background-color: rgb(254, 140, 159);
+}
 
 
 /* 반응형 처리 */
