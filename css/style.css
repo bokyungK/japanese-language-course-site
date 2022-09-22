@@ -1,6 +1,8 @@
 /* 공통 역역 */
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -23,7 +25,7 @@ header {
     left: 0;
     z-index: 1000;
 }
-/* 상단 메뉴바 고정 */
+
 
 a {
     text-decoration: none;
@@ -37,12 +39,10 @@ a {
     margin: 0 auto;
     padding: 0 2rem;
 }
-/* 꼭 padding으로 안 줘도 width랑 height를 70프로만 해줘도 되지 않을까? */
 
 .head-container {
     width: 100%;
     height: 100%;
-    /* flex로 내부 요소 정렬해야 하려면 container의 너비, 높이가 필요하니까 사이즈 부모요소에 100%로 맞춰줌 */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -60,8 +60,6 @@ section {
     width: 100%;
     height: 100%;
 }
-/* 배너 배경에 이미지 넣고 흐리게 처리하기 */
-/* 사진 움직이면 이미지 움직이도록 만들기 */
 
 .banner {
     width: 100%;
@@ -89,7 +87,6 @@ section {
     font-size: 1.3rem;
     line-height: 2rem;
 }
-/* 마진 병합현상이 일어남 */
 
 .skill {
     padding: 3rem 0;
@@ -139,6 +136,7 @@ section {
 .lecture {
     width: 100%;
     height: 100%;
+    margin: 0 auto;
 }
 
 .lecture-container {
@@ -150,7 +148,6 @@ section {
 
 .lecture-title {
     height: 50px;
-    padding: 0 1rem;
     align-items: center;
     display: flex;
     justify-content: space-between;
@@ -164,7 +161,7 @@ section {
     width: 1.7rem;
     height: 1.7rem;
     border-radius: 50%;
-    background-color: #3f464d;
+    background-color: lightgray;
     color: #fff;
     text-align: center;
     line-height: 1.5rem;
@@ -173,54 +170,25 @@ section {
 
 .left-button {
     margin-right: 0.3rem;
-    background-color: lightgray;
 }
 
-.button-left-on {
+.button-on {
     background-color: #3f464d;
 }
 
-.button-left-on:hover {
+.button-on:hover {
     cursor: pointer;
     background-color: pink !important;
     transition: transform .2s;
     transform: translate(-1px); 
 }
 
-.right-button:hover {
-    cursor: pointer;
-    background-color: pink;
-}
-
-.button-right-on {
-    background-color: #3f464d;
-    /* transition: background-color 1s; */
-}
-
-.button-right-off {
-    background-color: lightgray;
-}
-
-.button-right-on:hover {
-    cursor: pointer;
-    background-color: pink !important;
-    transition: transform .2s;
-    transform: translate(1px); 
-}
-
-.button-right-off:hover {
-    background-color: lightgray;
-    cursor: auto;
-}
-
 .card-container {
-    width: 100%;
-    height: 100%;
-    margin-left: 1rem;
     display: flex;
     list-style: none;
-    padding-left: 0;
     transition: transform 1s;
+    padding-left: 0;
+    padding-bottom: 1rem;
 }
 
 .card {
@@ -235,7 +203,6 @@ section {
 }
 
 .card-detail {
-    height: 30%;
     display: block;
     padding: 0.5rem 0;
     margin-right: 0.5rem;

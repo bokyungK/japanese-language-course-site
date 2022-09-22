@@ -6,7 +6,7 @@ courselevelList.forEach((level, levelIdx) => {
     fetch(url + level)
     .then((response) => response.json())
     .then((data) => {
-        data.forEach((courseInfo, courseInfoIdx) => {
+        data.forEach((courseInfo) => {
             const id = courseInfo.id;
             const name = courseInfo.name;
             const description = courseInfo.description;
@@ -38,7 +38,10 @@ courselevelList.forEach((level, levelIdx) => {
     })
     .then(() => {
         flowText();
-    });
+    })
+    .then(() => {
+        setButton(levelIdx);
+    })
 });
 
 
@@ -54,22 +57,65 @@ const checkScroll = () => {
         upward.classList.remove('show');
     }
 }
-
 const moveBackToTop = () => {
     if (window.pageYOffset > 0) {
         window.scrollTo({top: 0, behavior: 'smooth'});
     }
 }
 
-window.addEventListener('scroll', checkScroll);
-upward.addEventListener('click', moveBackToTop);
+
+
+// 데이터 개수에 따른 초기 버튼 상태 세팅
+const setButton = (levelIdx) => {
+    const cardContainer = document.getElementsByClassName('card-container')[levelIdx];
+    const liList = cardContainer.children[0];
+    const liListWidth = parseInt(window.getComputedStyle(liList).width) + 16;
+    const liListLength= cardContainer.children.length;
+    const totalSliderWidth = liListWidth * liListLength;
+
+    const lectureContainer = cardContainer.parentElement;
+    const nowSliderWidth = parseInt(window.getComputedStyle(lectureContainer).width);
+    const rightButton = cardContainer.previousElementSibling.children[1].children[1];
+
+    if (totalSliderWidth > nowSliderWidth) {
+        rightButton.classList.add('button-on');
+        rightButton.addEventListener('click', moveLeft);
+    } else {
+        rightButton.classList.remove('button-on');
+        rightButton.removeEventListener('click', moveLeft);
+    }
+}        
 
 
 
-// 강의 슬라이더
-const leftButton = document.getElementsByClassName('left-button');
-const rightButton = document.getElementsByClassName('right-button');
+// 화면 크기별 버튼 상태 바꾸기
+const changeButton = () => {
+    const cardContainer = document.getElementsByClassName('card-container');
+    const cardContainerArr = Array.from(cardContainer);
 
+    cardContainerArr.forEach((cardContainer) => { 
+        const liList = cardContainer.children[0];
+        const liListWidth = parseInt(window.getComputedStyle(liList).width) + 16;
+        const liListLength= cardContainer.children.length;
+        const totalSliderWidth = liListWidth * liListLength;
+    
+        const lectureContainer = cardContainer.parentElement;
+        const nowSliderWidth = parseInt(window.getComputedStyle(lectureContainer).width);
+        const rightButton = cardContainer.previousElementSibling.children[1].children[1];
+    
+        if (totalSliderWidth > nowSliderWidth) {
+            rightButton.classList.add('button-on');
+            rightButton.addEventListener('click', moveLeft);
+        } else {
+            rightButton.classList.remove('button-on');
+            rightButton.removeEventListener('click', moveLeft);
+        }
+    })
+}
+
+
+
+// 강의 슬라이더 기능
 function moveRight(event) {
     const leftButton = event.target;
     const rightButton = leftButton.nextElementSibling;
@@ -77,24 +123,21 @@ function moveRight(event) {
 
     const lectureContainer = cardContainer.parentElement;
     const nowSliderWidth = parseInt(window.getComputedStyle(lectureContainer).width);
-    let moveDist = parseInt(lectureContainer.getAttribute('data-moveDist'));
+    let moveDist = parseInt(lectureContainer.getAttribute('data-move'));
 
     if (Math.abs(moveDist) > nowSliderWidth) {
         moveDist += nowSliderWidth;
-        cardContainer.style.transform = 'translateX(' + String(moveDist) + 'px';
+        cardContainer.style.transform = 'translateX(' + String(moveDist) + 'px)';
     } else {
         moveDist = 0;
-        cardContainer.style.transform = 'translateX(' + String(moveDist) + 'px';
-
+        cardContainer.style.transform = 'translateX(' + String(moveDist) + 'px)';
         leftButton.removeEventListener('click', moveRight);
-        leftButton.classList.remove('button-left-on');
-        leftButton.classList.add('button-left-off');
+        leftButton.classList.remove('button-on');
     }
-    lectureContainer.setAttribute('data-moveDist', `${moveDist}`);
-
+    lectureContainer.setAttribute('data-move', `${moveDist}`);
     rightButton.addEventListener('click', moveLeft);
-    rightButton.classList.add('button-right-on');
-    rightButton.classList.remove('button-right-off');
+    rightButton.classList.add('button-on');
+    rightButton.removeAttribute('data-last-width');
 }
 
 function moveLeft(event) {
@@ -108,32 +151,44 @@ function moveLeft(event) {
 
     const lectureContainer = cardContainer.parentElement;
     const nowSliderWidth = parseInt(window.getComputedStyle(lectureContainer).width);
-    let moveDist = parseInt(lectureContainer.getAttribute('data-moveDist'));
+    let moveDist = parseInt(lectureContainer.getAttribute('data-move'));
     moveDist -= nowSliderWidth;
 
     if (totalLiWidth + moveDist > nowSliderWidth) {
-        cardContainer.style.transform = 'translateX(' + String(moveDist) + 'px';
+        cardContainer.style.transform = 'translateX(' + String(moveDist) + 'px)';
     } else {
-        moveDist -= (totalLiWidth + moveDist - nowSliderWidth);
-        cardContainer.style.transform = 'translateX(' + String(moveDist) + 'px';
-
+        moveDist -= totalLiWidth + moveDist - nowSliderWidth;
+        cardContainer.style.transform = 'translateX(' + String(moveDist) + 'px)';
         rightButton.removeEventListener('click', moveLeft);
-        rightButton.classList.remove('button-right-on');
-        rightButton.classList.add('button-right-off');
+        rightButton.classList.remove('button-on');
+        rightButton.setAttribute('data-last-width', `${nowSliderWidth}`);
     }
-    lectureContainer.setAttribute('data-moveDist', `${moveDist}`);
-
+    lectureContainer.setAttribute('data-move', `${moveDist}`);
     leftButton.addEventListener('click', moveRight);
-    leftButton.classList.add('button-left-on');
-}
-
-for (let i = 0; i < leftButton.length; i++) {
-    rightButton[i].addEventListener('click', moveLeft);
+    leftButton.classList.add('button-on');
 }
 
 
 
-// 강의 description 이동 기능
+// 슬라이더 끝 위치에서 화면 키우면 공백 생기지 않게 방지
+const setSliderEnd = (event) => {
+    const cardContainer = document.getElementsByClassName('card-container')[0];
+    const rightButton = cardContainer.previousElementSibling.children[1].children[1];
+    const moveDist = parseInt(cardContainer.parentElement.getAttribute('data-move'));
+    const lastWidth = parseInt(rightButton.getAttribute('data-last-width'));
+    const lectureContainer = cardContainer.parentElement;
+    const nowSliderWidth = parseInt(window.getComputedStyle(lectureContainer).width);
+    const distance = moveDist + (nowSliderWidth - lastWidth);
+
+    if (lastWidth) {
+        rightButton.classList.remove('button-on');
+        cardContainer.style.transform = 'translateX(' + String(distance) + 'px)';
+    }
+}
+
+
+
+// 강의 설명 문구 움직이는 기능
 const flowText = () => {
     const cardDetail = document.getElementsByClassName('card-detail');
     
@@ -157,3 +212,8 @@ const flowText = () => {
         cardDetail[i].addEventListener('mouseover', moveDescription);
     }
 }
+
+window.addEventListener('scroll', checkScroll);
+upward.addEventListener('click', moveBackToTop);
+window.addEventListener('resize', changeButton);
+window.addEventListener('resize', setSliderEnd);
