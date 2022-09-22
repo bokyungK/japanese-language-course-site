@@ -124,6 +124,7 @@ function moveRight(event) {
     const lectureContainer = cardContainer.parentElement;
     const nowSliderWidth = parseInt(window.getComputedStyle(lectureContainer).width);
     let moveDist = parseInt(lectureContainer.getAttribute('data-move'));
+    cardContainer.style.removeProperty('transition');
 
     if (Math.abs(moveDist) > nowSliderWidth) {
         moveDist += nowSliderWidth;
@@ -182,6 +183,7 @@ const setSliderEnd = (event) => {
 
     if (lastWidth) {
         rightButton.classList.remove('button-on');
+        cardContainer.style.transition = 'transform 0s';
         cardContainer.style.transform = 'translateX(' + String(distance) + 'px)';
     }
 }
