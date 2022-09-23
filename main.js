@@ -1,6 +1,6 @@
 // api 호출
 const courselevelList = ['basic', 'middle', 'advanced'];
-const url = "http://localhost:3001/"
+const url = "https://unks9ywcwe.execute-api.ap-northeast-2.amazonaws.com/";
 
 courselevelList.forEach((level, levelIdx) => {
     fetch(url + level)
@@ -10,17 +10,19 @@ courselevelList.forEach((level, levelIdx) => {
             const id = courseInfo.id;
             const name = courseInfo.name;
             const description = courseInfo.description;
-
             const cardContainer = document.getElementsByClassName('card-container');
             const card = document.createElement('li');
+
             card.classList.add('card');
             const cardImg = document.createElement('img');
             cardImg.classList.add('card-img');
             cardImg.style.width = '180px';
             cardImg.style.height = '140px';
+
             const cardDetail = document.createElement('a');
             cardDetail.classList.add('card-detail');
             cardDetail.setAttribute('href', 'https://www.youtube.com/');
+            
             const cardName = document.createElement('div');
             cardName.classList.add('card-detail-name');
             const cardDescription = document.createElement('div')
