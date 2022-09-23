@@ -195,18 +195,17 @@ const setSliderEnd = (event) => {
 // 강의 설명 문구 움직이는 기능
 const flowText = () => {
     const cardDetail = document.getElementsByClassName('card-detail');
-    
     const moveDescription = (event) => {
-        const description = event.target.children[1];
-        const descriptionWidth = parseInt(window.getComputedStyle(description).width);
-    
-        if (descriptionWidth >= 164) {
-        description.style.transition = 'transform 2s';
-        description.style.transform = `translateX(-${Math.abs(descriptionWidth - 164)}px)`
-        event.target.addEventListener('mouseout', returnDescription);
+    const description = event.target.children[1];
+    const descriptionWidth = parseInt(window.getComputedStyle(description).width);
+
+    if (descriptionWidth >= 164) {
+    description.style.transition = 'transform 2s';
+    description.style.transform = `translateX(-${Math.abs(descriptionWidth - 164)}px)`
+    event.target.addEventListener('mouseout', returnDescription);
         }
     }
-    
+
     const returnDescription = (event) => {
         const description = event.target.children[1];
         description.style.transform = 'translateX(0)';
