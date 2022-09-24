@@ -244,6 +244,10 @@ footer {
     position: relative;
 }
 
+.info-blank {
+    display: none;
+}
+
 footer > div > div > div::after {
     content: "|";
     display: block;
@@ -312,7 +316,10 @@ footer > div > div > div:last-child::after {
     }
 }
 
-@media only screen and (max-width: 530px) {
+@media only screen and (max-width: 550px) {
+    .inner {
+        padding: 0 1rem;
+    }
     .head-container {
         font-size: 1rem;
         font-weight: bolder;
@@ -321,9 +328,11 @@ footer > div > div > div:last-child::after {
         font-size: 1.1rem;
     }
     .banner-message {
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
     .info-container {
-        font-size: 0.5rem;
+    }
+    .info-blank {
+        display: inline;
     }
 }
