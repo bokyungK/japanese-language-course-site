@@ -201,16 +201,17 @@ section {
 }
 
 .card-detail-name {
-    text-align: center;
     margin-bottom: 0.5rem;
+    text-align: center;
     font-size: 0.9rem;
     pointer-events: none;
     white-space: nowrap;
 }
 
 .card-detail-description {
+    margin: 0 auto;
     width: min-content;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     font-weight: normal;
     white-space: nowrap;
     transition: transform 3s;
