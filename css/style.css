@@ -244,6 +244,10 @@ footer {
     position: relative;
 }
 
+.info-br {
+    display: none;
+}
+
 .info-blank {
     display: none;
 }
@@ -330,9 +334,11 @@ footer > div > div > div:last-child::after {
     .banner-message {
         font-size: 1rem;
     }
-    .info-container {
+    .info-br {
+        display: inline;
     }
     .info-blank {
         display: inline;
+        opacity: 0;
     }
 }
