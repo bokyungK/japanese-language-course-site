@@ -157,22 +157,20 @@ section {
 }
 
 .button {
-    width: 1.8rem;
-    height: 1.8rem;
+    width: 2rem;
+    height: 2rem;
+    padding: 0.4rem;
     border-radius: 50%;
-    background-color: lightgray;
-    color: #fff;
-    text-align: center;
-    line-height: 1.6rem;
+    background-color: #3f464d;
     transition: 0.3s;
 }
 
 .left-button {
-    margin-right: 0.5rem;
+    margin-right: 0.6rem;
 }
 
 .button-on {
-    background-color: #3f464d;
+    background-color: lightgray;
 }
 
 .card-container {
@@ -261,13 +259,11 @@ footer > div > div > div:last-child::after {
 
 /* 화면 최상단 이동 버튼 */
 #upward-button {
-    width: 2rem;
-    height: 2rem;
+    padding: 0.6rem;
+    width: 2.5rem;
+    height: 2.5rem;
     border-radius: 50%;
     background-color: #3f464d;
-    color: #fff;
-    text-align: center;
-    line-height: 1.9rem;
     position: fixed;
     bottom: 2rem;
     right: 2rem;
