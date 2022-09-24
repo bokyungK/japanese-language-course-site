@@ -16,6 +16,9 @@ courselevelList.forEach((level, levelIdx) => {
             card.classList.add('card');
             const cardImg = document.createElement('img');
             cardImg.classList.add('card-img');
+
+            
+출처: https://solbel.tistory.com/1754 [개발자의 끄적끄적:티스토리]
             cardImg.style.width = '180px';
             cardImg.style.height = '140px';
 
