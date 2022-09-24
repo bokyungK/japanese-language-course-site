@@ -163,7 +163,7 @@ section {
     background-color: lightgray;
     color: #fff;
     text-align: center;
-    line-height: 1.5rem;
+    line-height: 1.6rem;
     transition: 0.3s;
 }
 
@@ -258,6 +258,7 @@ footer > div > div > div:last-child::after {
 }
 
 
+
 /* 화면 최상단 이동 버튼 */
 #upward-button {
     width: 2rem;
@@ -266,7 +267,7 @@ footer > div > div > div:last-child::after {
     background-color: #3f464d;
     color: #fff;
     text-align: center;
-    line-height: 1.7rem;
+    line-height: 1.9rem;
     position: fixed;
     bottom: 2rem;
     right: 2rem;
@@ -288,12 +289,21 @@ footer > div > div > div:last-child::after {
 
 
 /* 반응형 처리 */
+@media (hover: hover) {
+    .button-on:hover {
+        cursor: pointer;
+        background-color: pink !important;
+        transition: transform .2s;
+        transform: translate(-1px); 
+    }
+  }
+
 @media only screen and (min-width: 1200px) {
     .inner {
         max-width: 1200px;
     }
 }
-/* 모바일 버전 */
+
 @media only screen and (max-width: 824px) {
     .type-img {
         margin: 0.3rem;
@@ -321,12 +331,3 @@ footer > div > div > div:last-child::after {
         font-size: 0.5rem;
     }
 }
-
-@media (hover: hover) {
-    .button-on:hover {
-        cursor: pointer;
-        background-color: pink !important;
-        transition: transform .2s;
-        transform: translate(-1px); 
-    }
-  }
