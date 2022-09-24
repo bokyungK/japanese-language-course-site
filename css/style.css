@@ -196,7 +196,8 @@ section {
 
 .card-detail {
     display: block;
-    margin: 0.5rem;
+    margin: 0 auto;
+    padding: 0.5rem;
     overflow: hidden;
 }
 
@@ -210,6 +211,7 @@ section {
 
 .card-detail-description {
     margin: 0 auto;
+    text-align: center;
     width: min-content;
     font-size: 0.8rem;
     font-weight: normal;
