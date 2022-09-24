@@ -47,7 +47,6 @@ courselevelList.forEach((level, levelIdx) => {
 });
 
 
-
 // 페이지 업 버튼
 const upward = document.getElementById('upward-button');
 const checkScroll = () => {
@@ -193,11 +192,15 @@ const setSliderEnd = (event) => {
 
 
 // 강의 설명 문구 움직이는 기능
-const flowText = () => {
+const flowText = (event) => {
     const cardDetail = document.getElementsByClassName('card-detail');
     const moveDescription = (event) => {
     const description = event.target.children[1];
     const descriptionWidth = parseInt(window.getComputedStyle(description).width);
+
+    if (window.innerWidth < 550) {
+        return;
+    }
 
     if (descriptionWidth >= 164) {
     description.style.transition = 'transform 2s';
