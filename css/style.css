@@ -166,7 +166,7 @@ section {
     height: 2rem;
     padding: 0.4rem;
     border-radius: 50%;
-    background-color: #3f464d;
+    background-color: lightgray;
     transition: 0.3s;
 }
 
@@ -175,7 +175,7 @@ section {
 }
 
 .button-on {
-    background-color: lightgray;
+    background-color: #3f464d;
 }
 
 .card-container {
