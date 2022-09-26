@@ -179,6 +179,7 @@ section {
 }
 
 .card-container {
+    width: min-content;
     display: flex;
     list-style: none;
     transition: transform 1s;

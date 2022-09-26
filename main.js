@@ -68,16 +68,12 @@ const moveBackToTop = () => {
 // 데이터 개수에 따른 초기 버튼 상태 세팅
 const setButton = (levelIdx) => {
     const cardContainer = document.getElementsByClassName('card-container')[levelIdx];
-    const liList = cardContainer.children[0];
-    const liListWidth = parseInt(window.getComputedStyle(liList).width) + 16;
-    const liListLength= cardContainer.children.length;
-    const totalSliderWidth = liListWidth * liListLength;
-
+    const cardContainerWidth = parseInt(window.getComputedStyle(cardContainer).width) + 16;
     const lectureContainer = cardContainer.parentElement;
     const nowSliderWidth = parseInt(window.getComputedStyle(lectureContainer).width);
     const rightButton = cardContainer.previousElementSibling.children[1].children[1];
 
-    if (totalSliderWidth > nowSliderWidth) {
+    if (cardContainerWidth > nowSliderWidth) {
         rightButton.classList.add('button-on');
         rightButton.addEventListener('click', moveLeft);
     } else {
@@ -94,16 +90,12 @@ const changeButton = () => {
     const cardContainerArr = Array.from(cardContainer);
 
     cardContainerArr.forEach((cardContainer) => { 
-        const liList = cardContainer.children[0];
-        const liListWidth = parseInt(window.getComputedStyle(liList).width) + 16;
-        const liListLength= cardContainer.children.length;
-        const totalSliderWidth = liListWidth * liListLength;
-    
+        const cardContainerWidth = parseInt(window.getComputedStyle(cardContainer).width) + 16;
         const lectureContainer = cardContainer.parentElement;
         const nowSliderWidth = parseInt(window.getComputedStyle(lectureContainer).width);
         const rightButton = cardContainer.previousElementSibling.children[1].children[1];
     
-        if (totalSliderWidth > nowSliderWidth) {
+        if (cardContainerWidth > nowSliderWidth) {
             rightButton.classList.add('button-on');
             rightButton.addEventListener('click', moveLeft);
         } else {
@@ -120,7 +112,6 @@ function moveRight(event) {
     const leftButton = event.target;
     const rightButton = leftButton.nextElementSibling;
     const cardContainer = leftButton.parentElement.parentElement.nextElementSibling;
-
     const lectureContainer = cardContainer.parentElement;
     const nowSliderWidth = parseInt(window.getComputedStyle(lectureContainer).width);
     let moveDist = parseInt(lectureContainer.getAttribute('data-move'));
@@ -144,21 +135,17 @@ function moveRight(event) {
 function moveLeft(event) {
     const rightButton = event.target;
     const leftButton = rightButton.previousElementSibling;
-
-    const liList = rightButton.parentElement.parentElement.nextElementSibling.children;
-    const liWidth = parseInt(window.getComputedStyle(liList[0]).width);
-    const totalLiWidth = liList.length * (liWidth + 16);
     const cardContainer = rightButton.parentElement.parentElement.nextElementSibling;
-
+    const cardContainerWidth = parseInt(window.getComputedStyle(cardContainer).width);
     const lectureContainer = cardContainer.parentElement;
     const nowSliderWidth = parseInt(window.getComputedStyle(lectureContainer).width);
     let moveDist = parseInt(lectureContainer.getAttribute('data-move'));
     moveDist -= nowSliderWidth;
 
-    if (totalLiWidth + moveDist > nowSliderWidth) {
+    if (cardContainerWidth + moveDist > nowSliderWidth) {
         cardContainer.style.transform = 'translateX(' + String(moveDist) + 'px)';
     } else {
-        moveDist -= totalLiWidth + moveDist - nowSliderWidth;
+        moveDist -= cardContainerWidth + moveDist - nowSliderWidth;
         cardContainer.style.transform = 'translateX(' + String(moveDist) + 'px)';
         rightButton.removeEventListener('click', moveLeft);
         rightButton.classList.remove('button-on');
@@ -177,7 +164,7 @@ const cardContainer = Array.from(document.getElementsByClassName('card-container
 const startTouchOnSlider= (event) => {
     const currentSlider = event.currentTarget;
     const startX = event.touches[0].clientX;
-
+    
     currentSlider.addEventListener('touchmove', moveTouchOnSlider);
     currentSlider.addEventListener('touchend', endTouchOnSlider);
     currentSlider.setAttribute('data-touch-X', `${startX}`);
@@ -201,16 +188,13 @@ const endTouchOnSlider = (event) => {
     const currentSlider = event.currentTarget;
     currentSlider.removeEventListener('touchmove', moveTouchOnSlider);
     currentSlider.removeEventListener('touchend', endTouchOnSlider);
+    const cardContainerWidth = parseInt(window.getComputedStyle(currentSlider).width);
     const lectureContainer = currentSlider.parentElement;
     const nowSliderWidth = parseInt(window.getComputedStyle(lectureContainer).width);
-    
     let moveDist = parseInt(lectureContainer.getAttribute('data-move'));
-    const liList = currentSlider.children;
-    const liWidth = parseInt(window.getComputedStyle(liList[0]).width);
-    const totalLiWidth = liList.length * (liWidth + 16);
 
-    if (totalLiWidth + moveDist < nowSliderWidth) {
-        moveDist += nowSliderWidth - (totalLiWidth + moveDist);
+    if (cardContainerWidth + moveDist < nowSliderWidth) {
+        moveDist += nowSliderWidth - (cardContainerWidth + moveDist);
     }
     if (moveDist > 0) {
         moveDist = 0;
