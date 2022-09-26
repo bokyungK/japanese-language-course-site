@@ -307,7 +307,19 @@ footer > div > div > div:last-child::after {
         transform: translate(-1px); 
     }
     .card-detail-description:hover {
-        transition: transformX 0;
+        transform: none;
+    }
+}
+
+@media (pointer: coarse) {
+    .lecture-title {
+        justify-content: center;
+    }
+    .title-button {
+        display: none;
+    }
+    .card-container {
+        transition: transform 0s;
     }
 }
 

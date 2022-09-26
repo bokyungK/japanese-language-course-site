@@ -16,16 +16,12 @@ courselevelList.forEach((level, levelIdx) => {
             card.classList.add('card');
             const cardImg = document.createElement('img');
             cardImg.classList.add('card-img');
-
-            
-출처: https://solbel.tistory.com/1754 [개발자의 끄적끄적:티스토리]
             cardImg.style.width = '180px';
             cardImg.style.height = '140px';
 
             const cardDetail = document.createElement('a');
             cardDetail.classList.add('card-detail');
             cardDetail.setAttribute('href', 'https://www.youtube.com/');
-            
             const cardName = document.createElement('div');
             cardName.classList.add('card-detail-name');
             const cardDescription = document.createElement('div')
@@ -175,6 +171,58 @@ function moveLeft(event) {
 
 
 
+// 터치로 이동하는 경우
+const cardContainer = Array.from(document.getElementsByClassName('card-container'));
+
+const startTouchOnSlider= (event) => {
+    const currentSlider = event.currentTarget;
+    const startX = event.touches[0].clientX;
+
+    currentSlider.addEventListener('touchmove', moveTouchOnSlider);
+    currentSlider.addEventListener('touchend', endTouchOnSlider);
+    currentSlider.setAttribute('data-touch-X', `${startX}`);
+}
+
+const moveTouchOnSlider = (event) => {
+    const currentSlider = event.currentTarget;
+    const currentX = event.touches[0].clientX;
+    const lectureContainer = currentSlider.parentElement;
+    let moveDist = parseInt(lectureContainer.getAttribute('data-move'));
+    const previousX = parseInt(currentSlider.getAttribute('data-touch-X'));
+    const xDist = currentX - previousX;
+
+    moveDist += xDist;
+    currentSlider.style.transform = 'translateX(' + String(`${moveDist}`) + 'px)';
+    lectureContainer.setAttribute('data-move', `${moveDist}`);
+    currentSlider.setAttribute('data-touch-X', `${currentX}`);
+}
+
+const endTouchOnSlider = (event) => {
+    const currentSlider = event.currentTarget;
+    currentSlider.removeEventListener('touchmove', moveTouchOnSlider);
+    currentSlider.removeEventListener('touchend', endTouchOnSlider);
+    const lectureContainer = currentSlider.parentElement;
+    const nowSliderWidth = parseInt(window.getComputedStyle(lectureContainer).width);
+    
+    let moveDist = parseInt(lectureContainer.getAttribute('data-move'));
+    const liList = currentSlider.children;
+    const liWidth = parseInt(window.getComputedStyle(liList[0]).width);
+    const totalLiWidth = liList.length * (liWidth + 16);
+
+    if (totalLiWidth + moveDist < nowSliderWidth) {
+        moveDist += nowSliderWidth - (totalLiWidth + moveDist);
+    }
+    if (moveDist > 0) {
+        moveDist = 0;
+    }
+    
+    currentSlider.style.transform = 'translateX(' + String(`${moveDist}`) + 'px)';
+    lectureContainer.setAttribute('data-move', `${moveDist}`);
+    currentSlider.removeAttribute('data-touch-X');
+}
+
+
+
 // 슬라이더 끝 위치에서 화면 키우면 공백 생기지 않게 방지
 const setSliderEnd = (event) => {
     const cardContainer = document.getElementsByClassName('card-container')[0];
@@ -226,3 +274,6 @@ window.addEventListener('scroll', checkScroll);
 upward.addEventListener('click', moveBackToTop);
 window.addEventListener('resize', changeButton);
 window.addEventListener('resize', setSliderEnd);
+cardContainer.forEach((slider) => {
+    slider.addEventListener('touchstart', startTouchOnSlider);
+})
