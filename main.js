@@ -233,10 +233,6 @@ const flowText = (event) => {
     const description = event.target.children[1];
     const descriptionWidth = parseInt(window.getComputedStyle(description).width);
 
-    if (window.innerWidth < 550) {
-        return;
-    }
-
     if (descriptionWidth >= 164) {
     description.style.transition = 'transform 2s';
     description.style.transform = `translateX(-${Math.abs(descriptionWidth - 164)}px)`

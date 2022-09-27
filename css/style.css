@@ -322,6 +322,11 @@ footer > div > div > div:last-child::after {
     .card-container {
         transition: transform 0s;
     }
+    .card-detail-description {
+        width: inherit;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
 }
 
 @media only screen and (min-width: 1200px) {
@@ -355,11 +360,6 @@ footer > div > div > div:last-child::after {
     }
     .banner-message {
         font-size: 1rem;
-    }
-    .card-detail-description {
-        width: inherit;
-        text-overflow: ellipsis;
-        overflow: hidden;
     }
     .info-br {
         display: inline;
