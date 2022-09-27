@@ -21,7 +21,7 @@ courselevelList.forEach((level, levelIdx) => {
 
             const cardDetail = document.createElement('a');
             cardDetail.classList.add('card-detail');
-            cardDetail.setAttribute('href', 'https://www.youtube.com/');
+            cardDetail.setAttribute('href', '');
             const cardName = document.createElement('div');
             cardName.classList.add('card-detail-name');
             const cardDescription = document.createElement('div')
